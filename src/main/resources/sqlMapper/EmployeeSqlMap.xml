@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.plang.HoWooAccount.hr.affair.mapper.EmployeeDAO">
+    <!-- selectEmployee -->
+    <select id="selectEmployee" parameterType="String" resultType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+			<![CDATA[
+        SELECT EMP_CODE               as empCode,
+               EMP_NAME               as empName,
+               USER_PW                as userPw,
+               POSITION_CODE          as positionCode,
+               POSITION_NAME          as positionName,
+               DEPT_CODE              as deptCode,
+               EMAIL                  as eMail,
+               GENDER                 as gender,
+               SOCIAL_SECURITY_NUMBER as socialSecurityNumber,
+               PHONE_NUMBER           as phoneNumber,
+               COMPANY_CODE           as companyCode,
+               BIRTH_DATE             as birthDate,
+               ZIP_CODE               as ZipCode,
+               BASIC_ADDRESS          as BasicAddress,
+               DETAIL_ADDRESS         as DetailAddress,
+               IMAGE
+        FROM EMPLOYEE
+        WHERE EMP_CODE = #{empCode}
+        ]]>
+    	</select>
+
+
+    <!-- selectEmployeeList -->
+    <select id="selectEmployeeList" parameterType="String"
+            resultType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+    		    <![CDATA[
+        SELECT EMP_CODE               as empCode,
+               EMP_NAME               as empName,
+               USER_PW                as userPw,
+               POSITION_CODE          as positionCode,
+               DEPT_CODE              as deptCode,
+               EMAIL                  as eMail,
+               GENDER                 as gender,
+               PHONE_NUMBER           as phoneNumber,
+               BIRTH_DATE             as birthDate,
+               SOCIAL_SECURITY_NUMBER as socialSecurityNumber,
+               ZIP_CODE               as ZipCode,
+               BASIC_ADDRESS          as BasicAddress,
+               DETAIL_ADDRESS         as DetailAddress,
+               IMAGE
+        FROM EMPLOYEE
+        where DEPT_CODE = #{deptCode}
+        ]]>
+    	</select>
+
+    <!-- selectAllEmployeeList -->
+    <select id="selectAllEmployeeList" resultType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+    		    <![CDATA[
+        SELECT EMP_CODE               as empCode,
+               EMP_NAME               as empName,
+               USER_PW                as userPw,
+               POSITION_CODE          as positionCode,
+               DEPT_CODE              as deptCode,
+               EMAIL                  as eMail,
+               GENDER                 as gender,
+               PHONE_NUMBER           as phoneNumber,
+               BIRTH_DATE             as birthDate,
+               SOCIAL_SECURITY_NUMBER as socialSecurityNumber,
+               ZIP_CODE               as ZipCode,
+               BASIC_ADDRESS          as BasicAddress,
+               DETAIL_ADDRESS         as DetailAddress,
+               IMAGE
+        FROM EMPLOYEE
+        ]]>
+    	</select>
+
+    <!-- updateEmployeeInfo -->
+    <update id="updateEmployeeInfo" parameterType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+        UPDATE EMPLOYEE
+        SET USER_PW                = #{userPw},
+            EMP_NAME               = #{empName},
+            POSITION_CODE          = #{positionCode},
+            DEPT_CODE              = #{deptCode},
+            DEPT_NAME              = #{deptName},
+            PHONE_NUMBER           = #{phoneNumber},
+            ZIP_CODE               = #{ZipCode},
+            BASIC_ADDRESS          = #{BasicAddress},
+            DETAIL_ADDRESS         = #{DetailAddress},
+            EMAIL                  = #{eMail},
+            IMAGE                  = #{image},
+            SOCIAL_SECURITY_NUMBER = #{socialSecurityNumber}
+        WHERE EMP_CODE = #{empCode}
+    </update>
+
+
+    <!-- updateEmployee -->
+    <update id="updateEmployee" parameterType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+        UPDATE EMPLOYEE
+        SET DEPT_CODE=#{deptCode},
+            POSITION_CODE=#{positionCode}
+        WHERE EMP_CODE = #{empCode}
+    </update>
+
+
+    <!-- deleteEmployee -->
+    <delete id="deleteEmployee" parameterType="String">
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_CODE = #{empCode}
+    </delete>
+
+
+    <!-- insertEmployee -->
+    <insert id="insertEmployee" parameterType="net.plang.HoWooAccount.hr.affair.to.EmployeeBean">
+        INSERT INTO EMPLOYEE
+        ( EMP_CODE
+        , USER_PW
+        , EMP_NAME
+        , DEPT_CODE
+        , GENDER, SOCIAL_SECURITY_NUMBER
+        , PHONE_NUMBER
+        , EMAIL
+        , BIRTH_DATE
+        , ZIP_CODE
+        , BASIC_ADDRESS
+        , DETAIL_ADDRESS)
+        VALUES ( #{empCode}
+               , #{userPw}
+               , #{empName}
+               , #{deptCode}
+               , #{gender}
+               , #{socialSecurityNumber}
+               , #{phoneNumber}
+               , #{eMail}
+               , #{birthDate}
+               , #{ZipCode}
+               , #{BasicAddress}
+               , #{DetailAddress})
+    </insert>
+</mapper>

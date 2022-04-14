@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40317620-4ea0-450e-a5b6-9eb3cdec8cb7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<parameter name="slip_no" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT s.slip_no,
+       s.expense_report,
+       a.account_name,
+       s.dept_code,
+       s.reporting_date,
+       s.slip_status,
+       s.reporting_emp_code,
+       j.journal_no,
+       d.DEPT_name,
+       j.left_debtor_price,
+       j.right_credits_price,
+       e.emp_name
+FROM   SLIP S,
+       JOURNAL J,
+       EMPLOYEE E,
+       DEPARTMENT d,
+       ACCOUNT A
+
+
+WHERE  S.SLIP_NO  =J.SLIP_NO
+AND    e.DEPT_CODE=d.DEPT_CODE
+AND    e.EMP_CODE =s.REPORTING_EMP_CODE
+AND	   S.SLIP_NO=$P{slip_no} 
+AND    A.ACCOUNT_INNER_CODE=J.ACCOUNT_INNER_CODE]]>
+	</queryString>
+	<field name="SLIP_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SLIP_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SLIP_NO"/>
+	</field>
+	<field name="EXPENSE_REPORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EXPENSE_REPORT"/>
+		<property name="com.jaspersoft.studio.field.label" value="EXPENSE_REPORT"/>
+	</field>
+	<field name="ACCOUNT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_NAME"/>
+	</field>
+	<field name="DEPT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEPT_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEPT_CODE"/>
+	</field>
+	<field name="REPORTING_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REPORTING_DATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="REPORTING_DATE"/>
+	</field>
+	<field name="SLIP_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SLIP_STATUS"/>
+		<property name="com.jaspersoft.studio.field.label" value="SLIP_STATUS"/>
+	</field>
+	<field name="REPORTING_EMP_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REPORTING_EMP_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="REPORTING_EMP_CODE"/>
+	</field>
+	<field name="JOURNAL_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="JOURNAL_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="JOURNAL_NO"/>
+	</field>
+	<field name="DEPT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEPT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEPT_NAME"/>
+	</field>
+	<field name="LEFT_DEBTOR_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="LEFT_DEBTOR_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="LEFT_DEBTOR_PRICE"/>
+	</field>
+	<field name="RIGHT_CREDITS_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="RIGHT_CREDITS_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RIGHT_CREDITS_PRICE"/>
+	</field>
+	<field name="EMP_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_NAME"/>
+	</field>
+	<group name="SLIP_NO">
+		<groupExpression><![CDATA[$F{SLIP_NO}]]></groupExpression>
+	</group>
+	<group name="EXPENSE_REPORT">
+		<groupExpression><![CDATA[$F{EXPENSE_REPORT}]]></groupExpression>
+	</group>
+	<group name="ACCOUNT_NAME">
+		<groupExpression><![CDATA[$F{ACCOUNT_NAME}]]></groupExpression>
+	</group>
+	<group name="DEPT_CODE">
+		<groupExpression><![CDATA[$F{DEPT_CODE}]]></groupExpression>
+	</group>
+	<group name="REPORTING_DATE">
+		<groupExpression><![CDATA[$F{REPORTING_DATE}]]></groupExpression>
+	</group>
+	<group name="SLIP_STATUS">
+		<groupExpression><![CDATA[$F{SLIP_STATUS}]]></groupExpression>
+	</group>
+	<group name="REPORTING_EMP_CODE">
+		<groupExpression><![CDATA[$F{REPORTING_EMP_CODE}]]></groupExpression>
+	</group>
+	<group name="JOURNAL_NO">
+		<groupExpression><![CDATA[$F{JOURNAL_NO}]]></groupExpression>
+	</group>
+	<group name="DEPT_NAME">
+		<groupExpression><![CDATA[$F{DEPT_NAME}]]></groupExpression>
+	</group>
+	<group name="LEFT_DEBTOR_PRICE">
+		<groupExpression><![CDATA[$F{LEFT_DEBTOR_PRICE}]]></groupExpression>
+	</group>
+	<group name="RIGHT_CREDITS_PRICE">
+		<groupExpression><![CDATA[$F{RIGHT_CREDITS_PRICE}]]></groupExpression>
+	</group>
+	<group name="EMP_NAME">
+		<groupExpression><![CDATA[$F{EMP_NAME}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="125" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="704" y="10" width="64" height="25" backcolor="#C9C9C9" uuid="ec9e2789-b3e2-46e8-9da2-92071e1d2ef6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="704" y="38" width="64" height="35" uuid="c0fed3a9-c4dd-4e18-8662-fc816892d24f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="38" width="64" height="35" uuid="aed2ab08-0c07-4ee9-93fe-a2228be552c5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="576" y="38" width="64" height="35" uuid="8e809448-92c3-4dec-b007-f71c71909ec1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="512" y="38" width="64" height="35" uuid="5bfef4e1-8b54-4c62-97c3-fdabda4cb85f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="10" width="64" height="25" backcolor="#C9C9C9" uuid="f48e845c-de4f-4d3f-96bf-dc3faf839c8b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="576" y="10" width="64" height="25" backcolor="#C9C9C9" uuid="8796feda-e738-4f1a-833a-d2d425be2009">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="512" y="10" width="64" height="25" backcolor="#C9C9C9" uuid="854ee942-39d8-4049-855f-142ba0fc925c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="482" y="10" width="30" height="63" backcolor="#C9C9C9" uuid="2b5b1e95-61b8-4e7d-a82e-1a6123af854a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="60" y="14" width="327" height="59" uuid="adf04ab0-11f4-4670-bdb1-9c5f4c5d2c47">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[회 계 전 표]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="10" width="30" height="63" uuid="6f68bdbc-3b61-4a9b-8c09-5031a0018d09">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[결재]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="9" width="64" height="25" uuid="b1b2da25-208a-45dd-bcbb-e7bf84bcebaf">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[담 당]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="704" y="9" width="64" height="25" uuid="c2523b9b-d6ca-44b3-b390-e6a0191cae49">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[사 장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="10" width="64" height="25" uuid="7413c4db-3c63-425a-b13c-a4837634a912">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[부 장]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="10" width="64" height="25" uuid="9604d9a0-e6c6-445c-a5f0-790fb2592e02">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[과 장]]></text>
+			</staticText>
+			<image>
+				<reportElement x="530" y="36" width="56" height="38" uuid="14d6c02d-8a63-42cd-8a52-5a114b934f6c"/>
+				<imageExpression><![CDATA["C:/dev/IntelliJ/Account_Project/WebContent/resources/reportform/dojang13.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="57" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="20" y="30" width="54" height="20" uuid="f5aad90b-ff29-4417-9a5e-7666b5984b14">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[전표번호 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="30" width="49" height="20" uuid="c351188e-1fa6-4437-b0c5-8a8d915ff6bc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[작성일자 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="30" width="47" height="20" uuid="ddae7880-ada3-4687-8498-410a40aca31c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[작성자 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="10" width="47" height="20" uuid="1a15c376-c09e-458f-8ca3-dce63a295588">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[부   서 : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="30" width="212" height="20" uuid="6301d1d6-14b3-475d-8dbe-4e5652862710">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{slip_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="30" width="131" height="20" uuid="91e8e88a-15fc-4643-93a4-a3d7ebee5491">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REPORTING_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="697" y="10" width="83" height="20" uuid="47c88377-0db1-4204-b568-d78e85211cb0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="697" y="30" width="83" height="20" uuid="034a3f6f-4992-4ac8-9271-fbae7f906521">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMP_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="105" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="20" y="10" width="130" height="50" backcolor="#F2CFCE" uuid="b3053e82-3c09-47d5-9a13-61b0034f8f03">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="10" width="370" height="50" backcolor="#F2CFCE" uuid="ee46cebf-5a6f-4c1b-821f-bd3f77dfabfa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="520" y="10" width="260" height="25" backcolor="#F2CFCE" uuid="3e2238c7-e1e9-41e7-b1cb-45bab39e96f0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="520" y="35" width="130" height="25" backcolor="#F2CFCE" uuid="4a472a75-27a5-4132-9c82-ee0ccd50a139">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="35" width="130" height="25" backcolor="#F2CFCE" uuid="55b6ac83-a8e0-4812-afa9-b6dc59181754">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="20" y="60" width="130" height="30" uuid="ce5894d9-57b7-4301-96d8-c1539fe934c5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="60" width="370" height="30" uuid="6319256f-e084-4db6-910f-524320a1d051">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="520" y="60" width="130" height="30" uuid="1531ec08-64da-4cbd-9777-463e58a34090">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="650" y="60" width="130" height="30" uuid="362137db-6f96-4ed3-902c-b1c4e46cb019">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="150" y="10" width="370" height="50" uuid="1416fdd9-e20a-498c-89e2-11b733a4bfe3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[적  요]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="10" width="130" height="50" uuid="8e7a2643-192b-4cab-aa9a-b2af40f0e2de">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[계 정 과 목]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="34" width="130" height="25" uuid="8f48dce2-df48-4f29-ac6c-f0a07f2153a2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[대  변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="35" width="130" height="25" uuid="ac38618a-2826-422a-b3ec-ac106acaa7fe">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[차  변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="10" width="260" height="25" uuid="308347a2-8ff0-4246-9dd0-e40eb802910b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[금  액]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="60" width="130" height="30" uuid="739bf4f3-7b42-4fe0-babd-72f97dabf8cb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCOUNT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="60" width="370" height="30" uuid="20939d21-baa0-45a4-8a50-9629c8136f7f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EXPENSE_REPORT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="520" y="60" width="130" height="30" uuid="4c7ad95c-95a8-4b1c-aa79-b89aff8cd147">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEFT_DEBTOR_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="60" width="130" height="30" uuid="26f5c998-3d3d-4692-a891-8340460c22b6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RIGHT_CREDITS_PRICE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.account.statement.mapper.DetailTrialBalanceDAO">
+
+
+	<!-- selectCashJournalList -->
+	<select id="selectDetailTrialBalance" parameterType="java.util.HashMap" resultType="net.plang.HoWooAccount.account.statement.to.DetailTrialBalanceBean">
+			<![CDATA[
+        	SELECT
+				nvl(LEV,0) AS lev,
+				CODE AS accountInnerCode,
+				nvl(DEBITS_SUM,0) AS debitsSum,
+				nvl(EXCEPT_CASH_DEBITS,0) AS exceptCashDebits,
+				nvl(CASH_DEBITS,0) AS cashDebits,
+				LPAD(' ', ( LEV - 1 ) * 4) || NVL(A1.ACCOUNT_NAME, '합계') AS accountName,
+				nvl(CASH_CREDITS,0) AS cashCredits,
+				nvl(EXCEPT_CASH_CREDITS,0) AS exceptCashCredits,
+				nvl(CREDITS_SUM,0) AS creditsSum
+			FROM   ACCOUNT A1,
+				(SELECT
+        			CASE
+          			WHEN ACCOUNT_CODE IS NOT NULL THEN 3
+          			WHEN APPEND_CODE IS NOT NULL THEN 2
+          			WHEN PARENT_CODE IS NOT NULL THEN 1
+        			END AS LEV,
+
+        		CASE
+          			WHEN ACCOUNT_CODE IS NOT NULL THEN ACCOUNT_CODE
+          			WHEN APPEND_CODE IS NOT NULL THEN APPEND_CODE
+          			WHEN PARENT_CODE IS NOT NULL THEN PARENT_CODE
+        		END AS CODE,
+
+        		PARENT_CODE,
+        		APPEND_CODE,
+        		ACCOUNT_CODE,
+		        SUM(DEBITS_SUM)           AS DEBITS_SUM,
+		        SUM(EXCEPT_CASH_DEBITS)   AS EXCEPT_CASH_DEBITS,
+		        SUM(CASH_DEBITS)          AS CASH_DEBITS,
+		        SUM(CASH_CREDITS)         AS CASH_CREDITS,
+		        SUM(EXCEPT_CASH_CREDITS)  AS EXCEPT_CASH_CREDITS,
+		        SUM(CREDITS_SUM)          AS CREDITS_SUM
+ 		FROM   (SELECT
+            	A1.ACCOUNT_INNER_CODE AS PARENT_CODE,
+                A2.ACCOUNT_INNER_CODE AS APPEND_CODE,
+                A3.ACCOUNT_CODE       AS ACCOUNT_CODE,
+                J1.DEBITS             AS DEBITS_SUM,
+
+                CASE
+                  WHEN J1.DEBITS = 0
+                  THEN 0
+                  ELSE J1.DEBITS - J2.CASH_DEBITS
+                END                   AS EXCEPT_CASH_DEBITS,
+
+                CASE
+                  WHEN J1.DEBITS = 0
+                  THEN 0
+                  ELSE J2.CASH_DEBITS
+                END                   AS CASH_DEBITS,
+
+                CASE
+                  WHEN J1.CREDITS = 0
+                  THEN 0
+                  ELSE J2.CASH_CREDITS
+                END                   AS CASH_CREDITS,
+
+                CASE
+                  WHEN J1.CREDITS = 0
+                  THEN 0
+                  ELSE J1.CREDITS - J2.CASH_CREDITS
+                END                   AS EXCEPT_CASH_CREDITS,
+
+                J1.CREDITS            AS CREDITS_SUM
+         FROM   ACCOUNT A1,
+                ACCOUNT A2,
+                ACCOUNT A3,
+                (SELECT J.SLIP_NO             AS SLIP_NO,
+                        J.ACCOUNT_INNER_CODE  AS ACCOUNT_CODE,
+                        J.LEFT_DEBTOR_PRICE   AS DEBITS,
+                        J.RIGHT_CREDITS_PRICE AS CREDITS
+                 FROM   JOURNAL J,
+                        ACCOUNT A,
+                        SLIP S
+                 WHERE  J.SLIP_NO = S.SLIP_NO
+                        AND J.ACCOUNT_INNER_CODE = A.ACCOUNT_INNER_CODE
+                        AND S.SLIP_STATUS = '승인'
+                        AND S.REPORTING_DATE BETWEEN #{fromDate} AND #{toDate}
+                        AND J.ACCOUNT_INNER_CODE != '0101') J1,
+                (SELECT SLIP_NO,
+                        LEFT_DEBTOR_PRICE   AS CASH_CREDITS,
+                        RIGHT_CREDITS_PRICE AS CASH_DEBITS
+                 FROM   JOURNAL
+                 WHERE  ACCOUNT_INNER_CODE = '0101') J2
+         WHERE  J1.SLIP_NO = J2.SLIP_NO
+                AND J1.ACCOUNT_CODE = A3.ACCOUNT_INNER_CODE
+                AND A3.PARENT_ACCOUNT_INNER_CODE = A2.ACCOUNT_INNER_CODE(+)
+                AND A2.PARENT_ACCOUNT_INNER_CODE = A1.ACCOUNT_INNER_CODE(+)
+         )
+ 		GROUP  BY ROLLUP ( PARENT_CODE, APPEND_CODE, ACCOUNT_CODE )) A2
+		WHERE  A1.ACCOUNT_INNER_CODE(+) = A2.CODE
+		ORDER  BY SUBSTR(CODE, 1, 4),
+   		SUBSTR(CODE, 6) DESC NULLS LAST
+      ]]>
+		</select>
+</mapper>

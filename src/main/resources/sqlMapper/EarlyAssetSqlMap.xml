@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.account.statement.mapper.EarlyAssetDAO">
+
+	<resultMap id="earlyAssetResult" type="net.plang.HoWooAccount.account.statement.to.EarlyAssetBean">
+		<result property="gropuCode" column="GROUP_CODE" />
+		<result property="accountInnerCode" column="ACCOUNT_INNER_CODE" />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<result property="price" column="PRICE" />
+		<result property="statementsDivision" column="STATEMENTS_DIVISION" />
+		<result property="balanceDivision" column="BALANCE_DIVISION" />
+		<result property="leftDebtorPrice" column="LEFT_DEBTOR_PRICE" />
+		<result property="rightCreditsPrice" column="RIGHT_CREDITS_PRICE" />
+	</resultMap>
+
+	<!-- findEarlyAssetlist -->
+	<select id="findEarlyAssetlist" resultMap="earlyAssetResult">
+			<![CDATA[
+		SELECT
+			NVL(ACCOUNT_NAME,'총합') AS ACCOUNT_NAME
+			 , SUM(DECODE(
+				ACCOUNT_NAME
+			, '대손충당금'
+			, -PRICE,'감가상각누계액'
+			, -PRICE,PRICE
+			)
+			) AS PRICE
+		FROM
+			(
+				SELECT
+					GROUP_CODE
+					 , ACCOUNT_NAME
+					 , PRICE
+				FROM EARLY_ASSETS
+			)
+		GROUP BY ROLLUP(GROUP_CODE,ACCOUNT_NAME)
+		]]>
+		</select>
+
+	<!-- findEarlyStatementslist -->
+	<select id="findEarlyStatementslist" resultMap="earlyAssetResult">
+			<![CDATA[
+		SELECT *
+		FROM EARLY_STATEMENTS
+		WHERE STATEMENTS_division='재무'
+		  AND BALANCE_DIVISION='대변'
+		  AND ACCOUNT_NAME NOT IN ('대손충당금','감가상각누계액')
+		]]>
+		</select>
+
+	<!-- earlyAssetSummarylist -->
+	<select id="earlyAssetSummarylist" resultMap="earlyAssetResult">
+			<![CDATA[
+		SELECT
+			GROUP_CODE
+			 , PRICE
+		FROM EARLY_VIEW
+		]]>
+		</select>
+
+	<!-- earlyStatelist -->
+	<select id="earlyStatelist" resultMap="earlyAssetResult">
+			<![CDATA[
+		SELECT
+			ACCOUNT_NAME
+			 , (NVL(LEFT_DEBTOR_PRICE,0)+NVL(RIGHT_CREDITS_PRICE,0)) AS PRICE
+		FROM EARLY_STATEMENTS
+		WHERE STATEMENTS_DIVISION='손익'
+		]]>
+		</select>
+
+	<!-- 		<parameterMap id="earlyStateSummaryParams" type="java.util.HashMap" >
+                <parameter property="ERROR_CODE" jdbcType="DECIMAL" javaType="int" mode="OUT" />
+                <parameter property="ERROR_MSG" jdbcType="VARCHAR" javaType="String" mode="OUT" />
+                <parameter property="RESULT" jdbcType="CURSOR" javaType="java.sql.ResultSet" mode="OUT" />
+            </parameterMap>
+
+
+            프로시저호출
+            <select id="callEarlyStateSummarylist" parameterMap="earlyStateSummaryParams" resultMap="earlyAssetResult" statementType="CALLABLE">
+                <![CDATA[
+                    {call EX_INCOME_STATE(?,?,?)}
+                ]]>
+            </select> -->
+
+</mapper>

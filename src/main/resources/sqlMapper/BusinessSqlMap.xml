@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.company.mapper.BusinessDAO">
+
+    <select id="selectBusinessList" resultType="net.plang.HoWooAccount.company.to.BusinessBean">
+    <![CDATA[
+        SELECT   BUSINESS_NAME          as businessName,
+                CLASSIFICATION_CODE    as classificationCode,
+                REMARKS             as remarks
+        FROM     BUSINESS 
+        ORDER BY CLASSIFICATION_CODE
+        ]]>
+    </select>
+</mapper>
+    

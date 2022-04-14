@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.hr.affair.mapper.DepartmentDAO">
+
+	<!-- selectDeptList -->
+	<select id="selectDeptList" resultType="net.plang.HoWooAccount.hr.affair.to.DepartmentBean">
+			<![CDATA[
+				SELECT
+				   	distinct WORKPLACE_CODE as workplaceCode,
+				   	WORKPLACE_NAME as workplaceName
+			  	FROM DEPARTMENT
+			]]>
+	</select>
+
+
+	<!-- selectDetailDeptList -->
+	<select id="selectDetailDeptList" parameterType="java.lang.String"
+		resultType="net.plang.HoWooAccount.hr.affair.to.DepartmentBean">
+			<![CDATA[
+				SELECT
+					   WORKPLACE_CODE as workplaceCode
+					   WORKPLACE_NAME as workplaceName,
+					   DEPT_CODE as deptCode,
+					   DEPT_NAME as deptName
+				  FROM DEPARTMENT
+				 WHERE WORKPLACE_CODE = #{workplaceCode}
+				   AND (DEPT_END_DATE > SYSDATE OR DEPT_END_DATE IS NULL)
+			]]>
+	</select>
+
+
+	<!-- selectDeptList2 -->
+	<select id="selectDeptList2" resultType="net.plang.HoWooAccount.hr.affair.to.DepartmentBean">
+		<![CDATA[
+			SELECT
+				   DEPT_CODE as deptCode,
+				   DEPT_NAME as deptName
+			  FROM DEPARTMENT
+		]]>
+	</select>
+
+</mapper>

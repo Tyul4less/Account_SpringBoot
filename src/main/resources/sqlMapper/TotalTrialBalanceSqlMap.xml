@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.account.statement.mapper.TotalTrialBalanceDAO">
+
+	<resultMap id="totalTrialBalanceResult" type="net.plang.HoWooAccount.account.statement.to.TotalTrialBalanceBean">
+		<result property="lev" column="LEV"  />
+		<result property="accountName" column="ACCOUNT_NAME" />
+		<result property="accountInnerCode" column="CODE"/>
+		<result property="debitsSumBalance" column="DEBITS_SUM_BALANCE" />
+		<result property="debitsSum" column="DEBITS_SUM" />
+		<result property="creditsSum" column="CREDITS_SUM" />
+		<result property="creditsSumBalance" column="CREDITS_SUM_BALANCE" />
+	</resultMap>
+
+	<resultMap id="accountingSettlementStatusResult" type="net.plang.HoWooAccount.account.statement.to.AccountingSettlementStatusBean">
+		<result property="accountPeriodNo" column="ACCOUNT_PERIOD_NO"/>
+		<result property="totalTrialBalance" column="TOTAL_TRIAL_BALANCE"/>
+		<result property="incomeStatement" column="INCOME_STATEMENT"/>
+		<result property="financialPosition" column="FINANCIAL_POSITION"/>
+	</resultMap>
+
+	<parameterMap id="totalTrialBalanceParams" type="java.util.Map">
+		<parameter property="accountPeriodNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+		<parameter property="callResult" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+		<parameter property="errorCode" jdbcType="DECIMAL" javaType="int" mode="OUT"/>
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+		<parameter property="totalTrialBalance" jdbcType="CURSOR" javaType="java.sql.ResultSet"  mode="OUT"
+				   resultMap="totalTrialBalanceResult"/>
+		<parameter property="accountingSettlementStatus" jdbcType="CURSOR" javaType="java.sql.ResultSet" mode="OUT"
+				   resultMap="accountingSettlementStatusResult"/>
+	</parameterMap>
+
+
+	<select id="callTotalTrialBalance" parameterMap="totalTrialBalanceParams" statementType="CALLABLE">
+		<![CDATA[
+         {call P_TOTAL_TRIAL_BALANCE(?, ?, ?, ?, ?, ?)}
+       ]]>
+	</select>
+
+
+	<parameterMap id="earlyStatementsParams" type="java.util.Map">
+		<parameter property="accountPeriodNo" jdbcType="VARCHAR" javaType="String" mode="IN"/>
+		<parameter property="callResult" jdbcType="VARCHAR" javaType="String" mode="IN"/>
+		<parameter property="errorCode" jdbcType="DECIMAL" javaType="int" mode="OUT"/>
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="String" mode="OUT"/>
+		<parameter property="accountingSettlementStatus" jdbcType="CURSOR" javaType="java.sql.ResultSet" mode="OUT"
+				   resultMap="accountingSettlementStatusResult"/>
+	</parameterMap>
+
+	<select id="callEarlyStatements" parameterMap="earlyStatementsParams" resultMap="accountingSettlementStatusResult" statementType="CALLABLE">
+		<![CDATA[
+         {call P_EARLY_STATEMENTS(?, ?, ?, ?, ?)}
+       ]]>
+	</select>
+
+	<select id="updateAccountingSettlement" parameterMap="earlyStatementsParams" statementType="CALLABLE">
+		<![CDATA[
+         {call P_ACCOUNTING_SETTLEMENT_STATUS(?, ?, ?, ?, ?)}
+       ]]>
+	</select>
+
+
+
+</mapper>

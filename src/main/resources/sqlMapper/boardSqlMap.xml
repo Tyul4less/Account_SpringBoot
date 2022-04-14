@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="net.plang.HoWooAccount.system.base.mapper.BoardDAO">
+
+	<select id="selectBoardList" resultType="net.plang.HoWooAccount.system.base.to.BoardBean">
+		<![CDATA[
+			SELECT
+				BOARD_NUM 		AS boardNum,
+				ID 				AS id,
+				TITLE 			AS title,
+				CONTENTS 		AS contents,
+				WRITTEN_BY 		AS writtenBy,
+				UPDATE_BY 		AS updateBy,
+				TO_CHAR(WRITE_DATE, 'yyyy:mm:dd-hh24mi')  		AS writeDate,
+				UPDATE_DATE 	AS updateDate,
+				LOOKUP 			AS lookUp,
+				BOARD_LIKE 		AS boardLike
+			FROM BOARD2
+			ORDER BY BOARD_NUM
+		]]>
+	</select>
+
+	<select id="selectPost" parameterType="String" resultType="net.plang.HoWooAccount.system.base.to.BoardBean">
+		<![CDATA[
+			SELECT
+			 	BOARD_NUM                                AS boardNum,
+				ID                                       AS id,
+				TITLE                                    AS title,
+				CONTENTS                                 AS contents,
+				WRITTEN_BY                               AS writtenBy,
+				UPDATE_BY                                AS updateBy,
+				TO_CHAR(WRITE_DATE, 'yyyy:mm:dd-hh24mi') AS writeDate,
+				UPDATE_DATE                              AS updateDate,
+				LOOKUP                                   AS lookUp,
+				BOARD_LIKE                               AS boardLike
+			FROM
+				BOARD2
+			WHERE BOARD_NUM = #{boardNum}
+		]]>
+	</select>
+
+	<select id="selectBoardFileList" parameterType="String" resultType="java.util.HashMap">
+
+			SELECT
+				FILE_ORINAME                             AS fileOriname,
+				FILE_URL                                 AS fileUrl
+			FROM
+				BOARD_FILE2
+			WHERE BOARD_NUM = #{boardNum}
+
+	</select>
+
+	<insert id="insertBoard" parameterType="net.plang.HoWooAccount.system.base.to.BoardBean">
+		<![CDATA[
+ 			INSERT INTO BOARD2 (
+ 				BOARD_NUM,
+				ID,
+				TITLE,
+				CONTENTS,
+				WRITTEN_BY,
+				UPDATE_BY,
+				WRITE_DATE,
+				UPDATE_DATE,
+				LOOKUP,
+				BOARD_LIKE
+			) VALUES (
+				BOARD_SQ.NEXTVAL,
+				#{id},
+				#{title},
+				#{contents},
+				#{id},
+				#{updateBy},
+				sysdate,
+				#{updateDate},
+				#{lookUp},
+				#{boardLike}
+			)
+ 		]]>
+    </insert>
+
+	<!--수정해야함-->
+	<insert id="insertBoardFileData" parameterType="net.plang.HoWooAccount.system.base.to.BoardBean">
+		<selectKey keyProperty="boardNum" resultType="java.lang.String" order="BEFORE">
+			SELECT MAX(BOARD_NUM) AS BOARD_NUM FROM BOARD2
+		</selectKey>
+ 			INSERT INTO BOARD_FILE2 (
+ 				BOARD_NUM,
+				FILE_URL,
+				FILE_ORINAME
+			) VALUES (
+				#{boardNum},
+				#{fileUrl},
+				#{fileOriname}
+			)
+	</insert>
+
+	<update id="updateBoard" parameterType="net.plang.HoWooAccount.system.base.to.BoardBean">
+		UPDATE
+			board2
+		SET
+			ID 				= #{id},
+			TITLE 			= #{title},
+			CONTENTS 		= #{contents},
+			WRITTEN_BY 		= #{writtenBy},
+			UPDATE_BY 		= #{updateBy},
+			WRITE_DATE 		= #{writeDate},
+			UPDATE_DATE 	= #{updateDate},
+			LOOKUP 			= #{lookUp},
+			BOARD_LIKE 		= #{boardLike}
+		WHERE BOARD_NUM = #{boardNum}
+	</update>
+
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="financStatus" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aada0d9b-037e-4fa9-bb66-68cb29181572">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ac2"/>
+	<parameter name="param_1" class="java.lang.String"/>
+	<parameter name="param_2" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[{call IM_FINANC_STAT_REPORT($P{param_1},$P{param_2},$P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="C1" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="C1"/>
+		<property name="com.jaspersoft.studio.field.label" value="C1"/>
+	</field>
+	<field name="ACCOUNT_NAME1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_NAME1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_NAME1"/>
+	</field>
+	<field name="AMOUNT1" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="AMOUNT1"/>
+		<property name="com.jaspersoft.studio.field.label" value="AMOUNT1"/>
+	</field>
+	<field name="ACCOUNT_NAME2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_NAME2"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_NAME2"/>
+	</field>
+	<field name="AMOUNT2" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="AMOUNT2"/>
+		<property name="com.jaspersoft.studio.field.label" value="AMOUNT2"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="241" y="30" width="73" height="18" uuid="42fdbe98-209c-4005-88ac-79df722e1dbc"/>
+				<textElement>
+					<font fontName="궁서체" size="14" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[재무상태표]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="278" height="32" backcolor="#A19C9C" uuid="c7a91097-4b4a-4c5e-9c9d-7425033034a7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="279" y="0" width="275" height="32" backcolor="#A19D9C" uuid="9a3e635b-6570-4046-9d9a-02bf648717c9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="129" y="10" width="21" height="12" backcolor="#A69E9D" uuid="5372d8f7-a260-447e-809f-f3f2fe44b0f5"/>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[차변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="9" width="20" height="16" uuid="c40a3e3f-41be-4386-8358-b0e9b19eb097"/>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[대변]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="54" uuid="e909a453-0bd7-486c-9973-38482290004a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac08590d-4586-4fe3-8075-9ad156264847"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[계정]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="54" uuid="e2af9af0-e115-49ac-82b4-c0d9e626e66b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="deca1b55-85f1-4fd8-abd1-369570d4e1f9"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[금액]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="54" uuid="ff26ee11-856d-49d8-814e-20c5b60b1e57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="deca1b55-85f1-4fd8-abd1-369570d4e1f9"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[계정]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="54" uuid="67457418-b6a7-48eb-adc1-6a476515568f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac08590d-4586-4fe3-8075-9ad156264847"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+					<paragraph lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[금액]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+			<textField>
+				<reportElement x="0" y="0" width="141" height="63" uuid="15321e0b-4153-4d63-8e94-118cf3f9dfea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac08590d-4586-4fe3-8075-9ad156264847"/>
+				</reportElement>
+				<textElement>
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ACCOUNT_NAME1}!=null)?$F{ACCOUNT_NAME1}:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="138" height="63" uuid="4df4a520-896a-451f-8f4b-312377da9123">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0e212fc8-1e64-4937-a9ad-6fc29e5a5187"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[($F{AMOUNT1}!=null)?$F{AMOUNT1}:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="138" height="63" uuid="1af86f7f-f989-42e4-a436-06e1791e3054">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="81032f83-2630-4a82-8037-c5177fb05378"/>
+				</reportElement>
+				<textElement>
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ACCOUNT_NAME2}!=null)?$F{ACCOUNT_NAME2}:""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="138" height="63" uuid="e407f340-22dc-4ba3-9ad4-2dd12b082d27">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="deca1b55-85f1-4fd8-abd1-369570d4e1f9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[($F{AMOUNT2}!=null)?$F{AMOUNT2}:""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

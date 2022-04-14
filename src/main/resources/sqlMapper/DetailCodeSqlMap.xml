@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.system.base.mapper.CodeDAO">
+		
+
+		<!-- selectDetailCodeList -->
+		<select id="selectDetailCodeList" parameterType="java.util.HashMap" resultType="net.plang.HoWooAccount.system.base.to.DetailCodeBean">
+			<![CDATA[
+				SELECT 
+					  DETAIL_CODE      as detailCode
+					, DETAIL_CODE_NAME as detailCodeName
+				FROM  CODE_DETAIL 
+			 	WHERE DIVISION_CODE_NO = #{divisionCodeNo}
+			]]>	
+			<if test="detailCodeName!=null">
+			  	<![CDATA[
+					DETAIL_CODE_NAME LIKE '%'||#{detailCodeName}||'%'
+			  	]]>
+			</if>
+		</select>
+		
+		
+		<!-- insertDetailCode -->
+		<insert id="insertDetailCode" parameterType="net.plang.HoWooAccount.system.base.to.DetailCodeBean">
+			<![CDATA[
+				INSERT INTO CODE_DETAIL
+		        	 (
+		        	   DIVISION_CODE_NO
+		        	 , DETAIL_CODE
+		        	 , DETAIL_CODE_NAME
+		        	 )
+		        VALUES
+		        	 (
+		        	   #{divisionCodeNo}
+		        	 , #{detailCode}
+		        	 , #{detailCodeName}
+		        	 )
+			]]>
+		</insert>
+		
+		
+		<!-- updateDetailCode -->
+		<update id="updateDetailCode" parameterType="net.plang.HoWooAccount.system.base.to.DetailCodeBean">
+			<![CDATA[
+				UPDATE CODE_DETAIL 
+				SET DETAIL_CODE_NAME = #{detailCodeName}
+					 , DETAIL_CODE = #{detailCode}
+				WHERE  DIVISION_CODE_NO = #{divisionCodeNo}
+				AND    DETAIL_CODE = #{detailCode}
+			]]>
+		</update>
+		
+		
+		<!-- deleteDetailCode -->
+		<delete id="deleteDetailCode" parameterType="String">
+			<![CDATA[
+				DELETE FROM CODE_DETAIL 
+				WHERE DETAIL_CODE = #{codeNo}
+			]]>	
+		</delete>
+		
+	</mapper>

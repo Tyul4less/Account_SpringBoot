@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="net.plang.HoWooAccount.account.slip.mapper.JournalDAO">
+
+    <select id="selectRangedJournalList" parameterType="java.util.HashMap"
+            resultType="net.plang.HoWooAccount.account.slip.to.JournalBean">
+		<![CDATA[
+        SELECT j.JOURNAL_NO          as journalNo,
+               J.SLIP_NO             as slipNo,
+               j.BALANCE_DIVISION    as balanceDivision,
+               j.LEFT_DEBTOR_PRICE   as leftDebtorPrice,
+               j.RIGHT_CREDITS_PRICE as rightCreditsPrice,
+               J.ACCOUNT_INNER_CODE  as accountCode,
+               j.CUSTOMER_CODE       as customerCode,
+               A.ACCOUNT_NAME        as accountName
+        FROM SLIP S
+           , JOURNAL J
+           , ACCOUNT A
+        WHERE J.SLIP_NO = S.SLIP_NO
+          AND J.ACCOUNT_INNER_CODE = A.ACCOUNT_INNER_CODE
+          AND S.REPORTING_DATE BETWEEN #{fromDate} AND #{toDate}
+          AND S.SLIP_STATUS = '승인'
+        ORDER BY S.REPORTING_DATE, S.SLIP_NO, J.JOURNAL_NO
+        ]]>
+    </select>
+
+    <select id="selectJournalList" parameterType="String"
+            resultType="net.plang.HoWooAccount.account.slip.to.JournalBean">
+		<![CDATA[
+        SELECT J.JOURNAL_NO          as journalNo,
+               J.SLIP_NO             as slipNo,
+               J.BALANCE_DIVISION    as balanceDivision,
+               J.ACCOUNT_INNER_CODE  as accountCode,
+               J.CUSTOMER_CODE       as customerCode,
+               J.LEFT_DEBTOR_PRICE   as leftDebtorPrice,
+               J.RIGHT_CREDITS_PRICE as rightCreditsPrice,
+               A.ACCOUNT_NAME        as accountName
+        FROM JOURNAL J,
+             ACCOUNT A
+        WHERE J.ACCOUNT_INNER_CODE = A.ACCOUNT_INNER_CODE
+          AND J.SLIP_NO = #{slipNo}
+        ]]>
+    </select>
+
+    <select id="selectJournalName" parameterType="String" resultType="String">
+			<![CDATA[
+        SELECT #{slipNo} || 'JOURNAL' || NVL(SUBSTR(MAX(JOURNAL_NO), INSTR(MAX(JOURNAL_NO), 'JOURNAL') + 7) + 1, 0)
+        FROM JOURNAL
+        WHERE SLIP_NO = #{slipNo}
+        ]]>
+	</select>
+
+    <insert id="insertJournal" parameterType="net.plang.HoWooAccount.account.slip.to.JournalBean">
+		<![CDATA[
+        INSERT INTO JOURNAL(JOURNAL_NO,
+                            SLIP_NO,
+                            BALANCE_DIVISION,
+                            ACCOUNT_INNER_CODE,
+                            CUSTOMER_CODE,
+                            RIGHT_CREDITS_PRICE,
+                            LEFT_DEBTOR_PRICE)
+        VALUES (#{journalNo},
+                #{slipNo},
+                #{balanceDivision},
+                #{accountCode},
+                #{customerCode},
+                #{rightCreditsPrice},
+                #{leftDebtorPrice})
+        ]]>
+    </insert>
+
+    <delete id="deleteJournal" parameterType="String">
+		<![CDATA[
+        DELETE
+        FROM JOURNAL
+        WHERE JOURNAL_NO = #{journalNo}
+        ]]>
+    </delete>
+
+    <delete id="deleteJournalAll" parameterType="String">
+		<![CDATA[
+        DELETE
+        FROM JOURNAL
+        WHERE SLIP_NO = #{slipNo}
+        ]]>
+    </delete>
+
+    <update id="updateJournal" parameterType="net.plang.HoWooAccount.account.slip.to.JournalBean">
+		<![CDATA[
+        UPDATE JOURNAL
+        SET BALANCE_DIVISION= #{balanceDivision},
+            ACCOUNT_INNER_CODE= #{accountCode},
+            CUSTOMER_CODE= #{customerCode},
+            RIGHT_CREDITS_PRICE= #{rightCreditsPrice},
+            LEFT_DEBTOR_PRICE= #{leftDebtorPrice}
+        WHERE SLIP_NO = #{slipNo}
+          AND JOURNAL_NO = #{journalNo}
+        ]]>
+    </update>
+
+
+</mapper>

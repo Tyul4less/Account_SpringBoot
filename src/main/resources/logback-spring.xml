@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="true">
+	<!-- Appenders -->
+	<appender name="console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern> %d{HH:mm} [%p] | %m { %F - %M :%L }%n </Pattern>
+		</encoder>
+	</appender>
+	<appender name="console-infolog"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern> %5p %m%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- RollingFileAppender -->
+<!-- 	<appender name="ROLLING"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			rollover daily
+			<fileNamePattern>C:\logs\logback\logback-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				or whenever the file size reaches 100MB
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender> -->
+
+	<!--참고자료 https://ckddn9496.tistory.com/82 -->
+	<!-- DailyRollingFileAppender -->
+	<appender name="DAILYROLLING"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- 가장 잘 알려진 RollingPolicy, 주로 일 또는 월 단위로 rollover -->
+			<!-- 일자별로 로그파일 적용하기 -->
+			<fileNamePattern>C:\logs\logback\logback-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern> <!-- %i,%d는 필수 토큰 , %i는 인덱스 -->
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- 일자별 로그파일구성외에도 로그파일의 크기가 너무 커지는 것을 방지하기 위한 옵션 -->
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!--일자별 백업파일의 보관기간을 얼마로 정할것인가에 대한 옵션 -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Email Appender -->
+	<appender name="EMAIL"
+		class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>smtp.naver.com</smtpHost> <!-- 호스트 -->
+		<smtpPort>587</smtpPort> <!-- 포트번호 -->
+		<STARTTLS>true</STARTTLS>
+		<username>soso6826</username> <!-- SMTP 설정한 계정 -->
+		<password>password</password> <!-- SMTP 설정한 계정의 패스워드 -->
+		<to>soso6826@naver.com</to> <!-- 받을 사람의 이메일 주소 -->
+		<from>soso6826@naver.com</from> <!-- 보내는 사람의 이메일 주소 -->
+		<subject>TEST - logback : %logger{20} - %m</subject>
+
+		<layout class="ch.qos.logback.classic.html.HTMLLayout" />
+
+		for testing , comment in production, default 256
+		<cyclicBufferTracker
+			class="ch.qos.logback.core.spi.CyclicBufferTracker">
+			Send just one log entry per email, ready for a lot of emails if you
+			put one.
+			<bufferSize>1</bufferSize>
+		</cyclicBufferTracker>
+		for testing , comment in production, default asynchronousSending =
+		true
+		<asynchronousSending>false</asynchronousSending>
+	</appender>
+
+
+	<!-- ERROR레벨 이상만 출력 -->
+	<root level="ERROR">
+		<!-- <appender-ref ref="EMAIL" />  설정시 이메일이 자꾸 오기 때문에 일단 비활성화 하였습니다. 활성화시 이메일이 갑니다 -->
+		<!-- <appender-ref ref="ROLLING" /> -->
+		<appender-ref ref="DAILYROLLING" />
+	</root>
+
+	<!-- 로거 -->
+	<logger name="jdbc.sqlonly" level="INFO"
+		appender-ref="console-infolog" />
+	<logger name="jdbc.resultsettable" level="INFO"
+		appender-ref="console-infolog" />
+	<logger name="org.springframework" level="error" />
+	<logger name="org.springframework.jdbc" level="error" />
+
+	<!-- 루트 로거 -->
+	<root level="all">
+		<appender-ref ref="console" />
+	</root>
+</configuration>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="report11" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20">
+    <property name="ireport.zoom" value="1.3310000000000004"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+    <style name="table">
+        <box>
+            <pen lineWidth="1.0" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="Heading 1" fontSize="16" isBold="true"/>
+    <subDataset name="Table Dataset 1"/>
+    <parameter name="slip_no" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[SELECT s.slip_no,
+        s.expense_report,
+        a.account_name,
+        s.dept_code,
+        s.reporting_date,
+        s.slip_status,
+        s.reporting_emp_code,
+        j.journal_no,
+        d.DEPT_name,
+        j.left_debtor_price,
+        j.right_credits_price,
+        e.emp_name
+        FROM   SLIP S,
+        JOURNAL J,
+        EMPLOYEE E,
+        DEPARTMENT d,
+        ACCOUNT A
+
+
+        WHERE  S.SLIP_NO  =J.SLIP_NO
+        AND    e.DEPT_CODE=d.DEPT_CODE
+        AND    e.EMP_CODE =s.REPORTING_EMP_CODE
+        AND    s.slip_no  =$P{slip_no}
+        AND    A.ACCOUNT_INNER_CODE=J.ACCOUNT_INNER_CODE]]>
+    </queryString>
+    <field name="slip_no" class="java.lang.String"/>
+    <field name="expense_report" class="java.lang.String"/>
+    <field name="DEPT_CODE" class="java.lang.String"/>
+    <field name="reporting_date" class="java.lang.String"/>
+    <field name="REPORTING_EMP_CODE" class="java.lang.String"/>
+    <field name="JOURNAL_NO" class="java.lang.String"/>
+    <field name="dept_name" class="java.lang.String"/>
+    <field name="account_name" class="java.lang.String"/>
+    <field name="left_debtor_price" class="java.math.BigDecimal"/>
+    <field name="right_credits_price" class="java.math.BigDecimal"/>
+    <field name="emp_name" class="java.lang.String"/>
+    <field name="slip_status" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="106" splitType="Stretch">
+            <rectangle>
+                <reportElement x="704" y="9" width="64" height="25" backcolor="#CCCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="640" y="9" width="64" height="25" backcolor="#CCCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="512" y="9" width="64" height="25" backcolor="#CCCCCC"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="704" y="9" width="64" height="24"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[사 장]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="640" y="9" width="64" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[부 장]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="512" y="8" width="64" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[담 당]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="576" y="9" width="64" height="25" backcolor="#CCCCCC"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="576" y="8" width="64" height="24"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                </textElement>
+                <text><![CDATA[과 장]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="704" y="37" width="64" height="35"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="482" y="9" width="30" height="63" backcolor="#CCCCCC"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="482" y="8" width="30" height="60" backcolor="#CCCCCC"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[결재]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="576" y="37" width="64" height="35"/>
+            </rectangle>
+            <frame>
+                <reportElement x="512" y="37" width="64" height="35"/>
+            </frame>
+            <staticText>
+                <reportElement x="63" y="9" width="324" height="60"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                </textElement>
+                <text><![CDATA[회 계 전 표]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="639" y="37" width="64" height="35"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="512" y="37" width="64" height="35"/>
+            </rectangle>
+            <image>
+                <reportElement x="524" y="37" width="40" height="38"/>
+                <imageExpression>
+                    <![CDATA["D:/dev/InteliJWorkSpace/Account4th/Account_SpringBoot/src/main/webapp/resources/reportform/dojang13.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="36" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="52" splitType="Stretch">
+            <textField>
+                <reportElement x="83" y="26" width="212" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{slip_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="440" y="26" width="105" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{reporting_date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="704" y="26" width="70" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{emp_name}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="19" y="26" width="54" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[전표번호 : ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="391" y="26" width="49" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[작성일자 : ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="657" y="26" width="47" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[작성자 : ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="657" y="6" width="47" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[부 서 : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="704" y="6" width="70" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dept_name}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="91" splitType="Stretch">
+            <rectangle>
+                <reportElement x="18" y="58" width="130" height="30"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="648" y="32" width="130" height="25" backcolor="#FFCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="518" y="7" width="260" height="25" backcolor="#FFCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="148" y="7" width="370" height="50" backcolor="#FFCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="18" y="7" width="130" height="50" backcolor="#FFCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="648" y="58" width="130" height="30"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="148" y="58" width="370" height="30"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="648" y="32" width="120" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[대   변]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="270" y="7" width="120" height="50"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[적요]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="518" y="32" width="130" height="25" backcolor="#FFCCCC"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="518" y="58" width="130" height="30"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="594" y="7" width="120" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+                </textElement>
+                <text><![CDATA[금   액]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="518" y="32" width="120" height="25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[차   변]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="18" y="7" width="120" height="50"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[계 정 과 목]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="256" y="58" width="36" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="18" y="58" width="130" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{account_name}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="518" y="58" width="130" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{left_debtor_price}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="648" y="58" width="130" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{right_credits_price}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="148" y="58" width="108" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+            </textField>
+            <textField>
+                <reportElement x="214" y="57" width="226" height="30"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font pdfFontName="D:\dev\InteliJWorkSpace\Account4th\Account_SpringBoot\src\main\webapp\resources\reportform\HYGSRB.TTF" pdfEncoding="Identity-H"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{expense_report}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="10" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="19" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="25" splitType="Stretch"/>
+    </summary>
+</jasperReport>

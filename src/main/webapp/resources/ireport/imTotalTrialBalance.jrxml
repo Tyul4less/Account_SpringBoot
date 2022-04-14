@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="totalTrialBalance" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ec4d734-32d3-4c37-a128-87e8cbe7a562">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlRPVEFMX1RSSUFMX0JBTEFOQ0UiICwxNSwxNSxmMjEwMzM2YS0yM2ZmLTRjZjMtOTU4ZS0wZWRj
+ZTI2ZDRkMDc7]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ac2"/>
+	<parameter name="param_1" class="java.lang.String"/>
+	<parameter name="param_2" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[{call IM_TOTAL_TRIAL_BALANCE_REPORT($P{param_1},$P{param_2},$P{ORACLE_REF_CURSOR})}]]>
+	</queryString>
+	<field name="R_CNT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="R_CNT"/>
+		<property name="com.jaspersoft.studio.field.label" value="R_CNT"/>
+	</field>
+	<field name="LEFT_BALANCE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="LEFT_BALANCE"/>
+		<property name="com.jaspersoft.studio.field.label" value="LEFT_BALANCE"/>
+	</field>
+	<field name="SUM_LEFT_DEBTOR_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="SUM_LEFT_DEBTOR_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUM_LEFT_DEBTOR_PRICE"/>
+	</field>
+	<field name="ACCOUNT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_NAME"/>
+	</field>
+	<field name="SUM_RIGHT_CREDITS_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="SUM_RIGHT_CREDITS_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUM_RIGHT_CREDITS_PRICE"/>
+	</field>
+	<field name="RIGHT_BALANCE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="RIGHT_BALANCE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RIGHT_BALANCE"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="220" y="0" width="100" height="18" uuid="56b89608-7c6d-4438-93db-adcbb9932157"/>
+				<textElement>
+					<font fontName="궁서체" size="14" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[합계잔액시산표]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="16" width="61" height="15" uuid="6b4fa14d-4505-410e-b855-3d53e22bdc04"/>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[SG주식회사]]></text>
+			</staticText>
+			<textField pattern="yyyy. MM. dd">
+				<reportElement x="432" y="4" width="100" height="15" uuid="1d4a06aa-f949-4e85-af63-20077a329037"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="444" y="19" width="43" height="13" uuid="cf5715ef-7b30-4648-a74d-f394d296945c"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[(단위: 원)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<rectangle>
+				<reportElement x="335" y="1" width="155" height="32" backcolor="#A19D9C" uuid="5772a913-fdf1-41fc-817c-142a9ff629c4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="48" y="1" width="158" height="32" backcolor="#A19C9C" uuid="257ca6ef-99f8-472f-acb5-b7dfb17de55e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="117" y="11" width="21" height="12" backcolor="#A69E9D" uuid="d97b2fbf-c9cd-47e6-85b8-7d578466d9d2"/>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[차변]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="8" width="20" height="16" uuid="1b554f7c-091d-4fe3-be50-ec2e74e18d86"/>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[대변]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="129" y="0" width="78" height="30" backcolor="#FFFFFF" uuid="5934b5fe-9ce6-4b05-a5a1-d1dbc78c1497"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="48" y="0" width="80" height="30" backcolor="#F280F2" uuid="7afc7a31-bbce-42f6-afc7-eb024c60af06"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="206" y="0" width="129" height="30" uuid="d8c7f34b-6916-4bd5-8561-fe8626280672"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="336" y="0" width="78" height="30" uuid="9c4022f3-4b90-4439-b102-0c3b167574b0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="415" y="0" width="75" height="30" backcolor="#F280F2" uuid="fc9937e7-2dfc-4420-8ac0-6596709ed332"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="260" y="9" width="20" height="13" uuid="8c0cf16d-f989-4df8-a689-71f924253d12">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbc4feaf-fe2b-48cd-892f-86487cfb2c1a"/>
+				</reportElement>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[과목]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="8" width="20" height="16" uuid="6e7567fb-12c7-4d05-ba4d-371dee9a5a7e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0490a598-0fa3-4de3-8469-ddab1eb56144"/>
+				</reportElement>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[합계]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="8" width="20" height="16" uuid="2620d948-b758-4bb7-a2fc-479db63612d4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a214bb77-4ca9-44c4-8bad-6dcea1aec56a"/>
+				</reportElement>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[잔액]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="10" width="20" height="13" uuid="5b2d1138-3945-4a6e-b3d1-027bacf672f6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0d08dab0-4dec-4fb8-b72b-dc80d346cdb6"/>
+				</reportElement>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[잔액]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="7" width="20" height="16" uuid="2e31bf61-ad39-49dd-a503-93c60f6bd49d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87df2f01-cdfe-4597-b680-f4c1b310060f"/>
+				</reportElement>
+				<textElement>
+					<font fontName="궁서체" pdfFontName="HYGSRB.TTF" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[합계]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<line>
+				<reportElement x="48" y="-1" width="1" height="31" uuid="279ef13b-f69a-462c-9257-223887a9f27e"/>
+			</line>
+			<line>
+				<reportElement x="490" y="0" width="1" height="30" uuid="979dc89d-0db5-482d-a120-7f61291e7549"/>
+			</line>
+			<textField>
+				<reportElement x="49" y="1" width="79" height="30" uuid="e6b560f7-a589-4e8b-9a7c-ce43c518154c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad820f37-eabd-4341-a939-d2ae19ebada5"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{LEFT_BALANCE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="1" width="78" height="30" uuid="c01ab478-5403-4dd5-b1c7-0d4ee8925dd2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4eff891a-2aac-4774-a0d5-e2567accf11e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{SUM_LEFT_DEBTOR_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="206" y="1" width="129" height="30" uuid="c0a9d0b6-b727-4491-a3d2-926ba5cadc16">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d43bd9e7-91b7-4ff5-a112-eeaebd4229d5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font pdfFontName="HYGoThic-Medium" pdfEncoding="UniKS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCOUNT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="1" width="80" height="30" uuid="660c1926-1455-484d-90e7-f73b43e2e59b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="856fe881-4d86-4590-805e-c3440525be29"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{SUM_RIGHT_CREDITS_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="1" width="76" height="30" uuid="2b63fcca-8215-4bd9-a5b1-88d6a10872d2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c36b3912-b6fe-4dff-89d0-f99653427d15"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{RIGHT_BALANCE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="47" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

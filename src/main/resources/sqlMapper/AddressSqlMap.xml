@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.plang.HoWooAccount.system.base.mapper.AddressDAO">
+		
+		<!-- selectRoadList -->
+		<select id="selectRoadList" parameterType="java.util.HashMap" resultType="net.plang.HoWooAccount.system.base.to.AddressBean">
+			<![CDATA[
+				SELECT 
+					ZIPCODE, 
+					ROAD_NAME      as roadName, 
+					BUILDING_CODE1 as buildingCode1, 
+					BUILDING_CODE2 as buildingCode2
+				FROM ROAD_POST_$sido$
+				WHERE SIGUNGU=#{sigunguname}
+				AND   ROAD_NAME like '%'||#{roadname}||'%'
+    		]]>
+		</select>
+		 
+		 
+		 <!-- selectSigunguList -->
+		 <select id="selectSigunguList" parameterType="String" resultType="net.plang.HoWooAccount.system.base.to.AddressBean">
+		 	<![CDATA[
+		 		SELECT   VALUE 
+		 		FROM     POST_SIGUNGU 
+		 		WHERE    CODE = #{sido}
+		 		GROUP BY VALUE
+		 	]]>	
+		 </select>
+		 
+		 
+		 <!-- selectSidoList -->
+		 <select id="selectSidoList" resultType="net.plang.HoWooAccount.system.base.to.AddressBean">
+		 	<![CDATA[
+		 		SELECT * 
+		 		FROM     POST_SI 
+		 		ORDER BY VALUE
+		 	]]>
+		 </select>
+		 
+		 
+		 <!-- selectPostList -->
+		 <select id="selectPostList" parameterType="String" resultType="net.plang.HoWooAccount.system.base.to.AddressBean">
+		 	<![CDATA[
+		 		SELECT 
+		 			  SIDO
+		 			, GUGUN
+		 			, DONG
+		 			, RI
+		 			, ZIP_NO 
+		 		FROM S_ZIPCODE 
+		 		WHERE dong LIKE  '%'||#{dong}||'%'
+		 	]]>
+		 </select>
+		 
+	</mapper>

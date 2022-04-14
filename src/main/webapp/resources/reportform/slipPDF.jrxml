@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="slipPDF" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4c02c71-b943-4b99-b5b9-1dc6f2533329">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="346"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="646"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT s.slip_no,
+       s.expense_report,
+       a.account_name,
+       s.dept_code,
+       s.reporting_date,
+       s.slip_status,
+       s.reporting_emp_code,
+       j.journal_no,
+       d.DEPT_name,
+       j.left_debtor_price,
+       j.right_credits_price,
+       e.emp_name
+FROM   SLIP S,
+       JOURNAL J,
+       EMPLOYEE E,
+       DEPARTMENT d,
+       ACCOUNT A
+
+
+WHERE  S.SLIP_NO  =J.SLIP_NO
+AND    e.DEPT_CODE=d.DEPT_CODE
+AND    e.EMP_CODE =s.REPORTING_EMP_CODE
+
+AND    A.ACCOUNT_INNER_CODE=J.ACCOUNT_INNER_CODE]]>
+	</queryString>
+	<field name="SLIP_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SLIP_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SLIP_NO"/>
+	</field>
+	<field name="EXPENSE_REPORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EXPENSE_REPORT"/>
+		<property name="com.jaspersoft.studio.field.label" value="EXPENSE_REPORT"/>
+	</field>
+	<field name="ACCOUNT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_NAME"/>
+	</field>
+	<field name="DEPT_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEPT_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEPT_CODE"/>
+	</field>
+	<field name="REPORTING_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REPORTING_DATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="REPORTING_DATE"/>
+	</field>
+	<field name="SLIP_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SLIP_STATUS"/>
+		<property name="com.jaspersoft.studio.field.label" value="SLIP_STATUS"/>
+	</field>
+	<field name="REPORTING_EMP_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REPORTING_EMP_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="REPORTING_EMP_CODE"/>
+	</field>
+	<field name="JOURNAL_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="JOURNAL_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="JOURNAL_NO"/>
+	</field>
+	<field name="DEPT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEPT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEPT_NAME"/>
+	</field>
+	<field name="LEFT_DEBTOR_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="LEFT_DEBTOR_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="LEFT_DEBTOR_PRICE"/>
+	</field>
+	<field name="RIGHT_CREDITS_PRICE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="RIGHT_CREDITS_PRICE"/>
+		<property name="com.jaspersoft.studio.field.label" value="RIGHT_CREDITS_PRICE"/>
+	</field>
+	<field name="EMP_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMP_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMP_NAME"/>
+	</field>
+	<group name="SLIP_NO">
+		<groupExpression><![CDATA[$F{SLIP_NO}]]></groupExpression>
+	</group>
+	<group name="EXPENSE_REPORT">
+		<groupExpression><![CDATA[$F{EXPENSE_REPORT}]]></groupExpression>
+	</group>
+	<group name="ACCOUNT_NAME">
+		<groupExpression><![CDATA[$F{ACCOUNT_NAME}]]></groupExpression>
+	</group>
+	<group name="DEPT_CODE">
+		<groupExpression><![CDATA[$F{DEPT_CODE}]]></groupExpression>
+	</group>
+	<group name="REPORTING_DATE">
+		<groupExpression><![CDATA[$F{REPORTING_DATE}]]></groupExpression>
+	</group>
+	<group name="SLIP_STATUS">
+		<groupExpression><![CDATA[$F{SLIP_STATUS}]]></groupExpression>
+	</group>
+	<group name="REPORTING_EMP_CODE">
+		<groupExpression><![CDATA[$F{REPORTING_EMP_CODE}]]></groupExpression>
+	</group>
+	<group name="JOURNAL_NO">
+		<groupExpression><![CDATA[$F{JOURNAL_NO}]]></groupExpression>
+	</group>
+	<group name="DEPT_NAME">
+		<groupExpression><![CDATA[$F{DEPT_NAME}]]></groupExpression>
+	</group>
+	<group name="LEFT_DEBTOR_PRICE">
+		<groupExpression><![CDATA[$F{LEFT_DEBTOR_PRICE}]]></groupExpression>
+	</group>
+	<group name="RIGHT_CREDITS_PRICE">
+		<groupExpression><![CDATA[$F{RIGHT_CREDITS_PRICE}]]></groupExpression>
+	</group>
+	<group name="EMP_NAME">
+		<groupExpression><![CDATA[$F{EMP_NAME}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

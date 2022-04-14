@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="net.plang.HoWooAccount.account.slip.mapper.JournalDetailDAO">
+
+
+<select id="selectJournalDetailList" parameterType="String" resultType="net.plang.HoWooAccount.account.slip.to.JournalDetailBean">
+		<![CDATA[
+ 			select
+				 J.JOURNAL_NO 			as journalNo,
+				 J.JOURNAL_DETAIL_NO 	as journalDetailNo,
+				 J.DESCRIPTION 			as journalDescription,
+				 A.ACCOUNT_CONTROL_TYPE as accountControlType,
+				 A.ACCOUNT_CONTROL_NAME as accountControlName,
+				 A.ACCOUNT_CONTROL_CODE as accountControlCode,
+				 A.DESCRIPTION          as accountControlDescription
+            from
+            	journal_detail j,
+            	account_control_detail a
+            where
+            	j.account_control_code=a.account_control_code
+            and j.journal_no= #{journalNo}
+ 		]]>
+    </select>
+
+	<select id="selectJournalDetailDescriptionName" parameterType="String" resultType="String">
+		<![CDATA[
+ 			SELECT C.DETAIL_CODE_NAME
+            FROM JOURNAL_DETAIL J, CODE_DETAIL C
+            WHERE J.DESCRIPTION = C.DETAIL_CODE
+            AND J.JOURNAL_DETAIL_NO = #{journalDetailNo}
+ 		]]>
+    </select>
+
+	<delete id="deleteJournalDetail" parameterType="java.util.List">
+		<![CDATA[
+             DELETE FROM JOURNAL_DETAIL
+             WHERE JOURNAL_NO IN
+         ]]>
+		<foreach item="item" index="index" collection="list"
+				 open="(" separator="," close=")">
+			#{item.journalNo}
+		</foreach>
+	</delete>
+
+	<delete id="deleteJournalDetailByJournalNo" parameterType="String">
+		<![CDATA[
+ 			DELETE FROM JOURNAL_DETAIL WHERE JOURNAL_NO = #{journalNo}
+ 		]]>
+    </delete>
+
+	<update id="updateJournalDetail" parameterType="net.plang.HoWooAccount.account.slip.to.JournalDetailBean">
+		<![CDATA[
+ 		]]>
+    </update>
+
+	<update id="insertJournalDetailList" parameterType="net.plang.HoWooAccount.account.slip.to.JournalDetailBean">
+		<![CDATA[
+			INSERT INTO JOURNAL_DETAIL(
+ 				JOURNAL_NO,
+				JOURNAL_DETAIL_NO,
+				ACCOUNT_CONTROL_CODE,
+				DESCRIPTION
+			)VALUES(
+				#{journalNo},
+				JOURNAL_DETAIL_NO_SEQUENCE.NEXTVAL,
+				#{accountControlCode},
+				#{journalDescription}
+			)
+ 		]]>
+    </update>
+
+</mapper>

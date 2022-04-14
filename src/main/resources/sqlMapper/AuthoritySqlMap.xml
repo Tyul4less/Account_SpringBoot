@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="net.plang.HoWooAccount.systeom.Authority.mapper.AuthorityDAO">
+
+				 
+		<!-- selectAuthorityEmp -->
+		<select id="selectAuthorityEmp" parameterType="String" resultType="net.plang.HoWooAccount.system.authority.to.AuthorityEmpBean">
+			<![CDATA[
+				SELECT m.MENU_CODE as menuCode
+				, m.MENU_NAME as menuName
+				, mu.AUTHORITY as authority
+				, mu.DEPT_CODE as deptCode
+				FROM MENU m,
+					(SELECT MENU_CODE, AUTHORITY, DEPT_CODE
+					 FROM MENU_USE_POSITION
+			 		WHERE DEPT_CODE =#{deptCode} ORDER BY MENU_CODE) mu
+			    WHERE mu.MENU_CODE = m.MENU_CODE
+    		]]>
+		</select>
+		 
+		 <!-- updateAuthority -->
+		 <update id="updateAuthority" parameterType="net.plang.HoWooAccount.system.authority.to.AuthorityEmpBean">
+		 	<![CDATA[
+		 		UPDATE MENU_USE_POSITION 
+		 		SET AUTHORITY=#{authority}
+		 		WHERE MENU_CODE=#{menuCode} AND DEPT_CODE=#{deptCode}
+		 	]]>
+		 </update>
+		 
+	</mapper>
